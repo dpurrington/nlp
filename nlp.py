@@ -1,18 +1,24 @@
 from nltk.corpus import gutenberg
 import nltk
 # nltk.download('gutenberg')
+#nltk.download('punkt')
 from pprint import pprint
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktTrainer
+from nltk.corpus import gutenberg
+import nltk.data
+sent_detector = nltk.data.load("tokenizers/punkt/english.pickle")
 
 text = ""
-trainer = PunktTrainer()
-trainer.INCLUDE_ALL_COLLOCS = True
-trainer.train(text)
+for file_id in gutenberg.fileids():
+    text += gutenberg.raw(file_id)
 
-tokenizer = PunktSentenceTokenizer(trainer.get_params())
+#trainer = PunktTrainer()
+#trainer.INCLUDE_ALL_COLLOCS = True
+#trainer.train(text)
 
+#tokenizer = PunktSentenceTokenizer(trainer.get_params())
+tokenizer = sent_detector
 # Test the tokenizer on a piece of text
-sentences = "Mr. James told me Dr. Brown is not available today. I will try tomorrow."
 tokenizer._params.abbrev_types.add('dr')
 tokenizer._params.abbrev_types.add('mr')
 
