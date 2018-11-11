@@ -2,3 +2,4 @@ name: nlp
 dependencies:
   - python=2.7
   - nltk
+  - flake8
